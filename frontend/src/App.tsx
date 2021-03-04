@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import Container from 'react-bootstrap/Container';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import HomeScreen from './screens/HomeScreen';
+import ProductScreen from './screens/ProductScreen';
+import CartScreen from './screens/CartScreen';
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Layout>
+        <main className='py-3'>
+          <Container>
+            <h1>Welcome To SHEShop</h1>
+            <Route path='/' component={HomeScreen} exact />
+            <Route path='/product/:id' component={ProductScreen} />
+            <Route path='/cart/:id?' component={CartScreen} />
+          </Container>
+        </main>
+      </Layout>
+    </Router>
   );
-}
+};
 
 export default App;
