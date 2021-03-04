@@ -1,4 +1,3 @@
-import { Number } from 'mongoose';
 import qs from 'querystring';
 import React, { useEffect } from 'react';
 import { Row, Col, ListGroup, Image, Form } from 'react-bootstrap';
@@ -63,7 +62,7 @@ const CartScreen: React.FC<Props> = ({ id }) => {
                       value={item.qty}
                       onChange={(e) => dispatch(e.target.value)}
                     >
-                      {[...Array(product.countInStock).keys()].map((x) => (
+                      {[...Array(item.countInStock).keys()].map((x) => (
                         <option key={x + 1} value={x + 1}>
                           {x + 1}
                         </option>
