@@ -1,24 +1,28 @@
 //Types / Action'
-import axios from 'axios';
-import { Dispatch } from 'redux';
-import store, { RootState } from '../../store';
+import axios from "axios";
+import { Dispatch } from "redux";
+import store, { RootState } from "../../store";
 import {
   //CART_REMOVE_ITEM,
   CartActions,
+  CartItem,
   CartState,
   CART_ADD_ITEM,
-} from './types';
+} from "./types";
 
-// const cartItemsFromStorage: Array<CartItem> = localStorage.getItem('cartItems')
-//   ? JSON.parse(localStorage.getItem('cartItems') ?? '')
-//   : [];
+const cartItemsFromStorage: Array<CartItem> = localStorage.getItem("cartItems")
+  ? JSON.parse(localStorage.getItem("cartItems") ?? "")
+  : [];
 
 //Reducer
 const initialState: CartState = {
-  cartItems: [],
+  cartItems: cartItemsFromStorage,
 };
 
-export default function reducer(state = initialState, action: CartActions) {
+export default function reducer(
+  state = initialState,
+  action: CartActions
+): CartState {
   switch (action.type) {
     case CART_ADD_ITEM:
       const item = action.payload;
@@ -62,5 +66,8 @@ export const addToCart = (id: string, qty: number) => async (
       qty,
     },
   });
-  localStorage.setItem('cartItems', JSON.stringify(store.getState().cart));
+  localStorage.setItem(
+    "cartItems",
+    JSON.stringify(store.getState().cart.cartItems)
+  );
 };

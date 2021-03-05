@@ -1,3 +1,4 @@
+//import { Number } from "mongoose";
 import qs from 'querystring';
 import React, { useEffect } from 'react';
 import { Row, Col, ListGroup, Image, Form } from 'react-bootstrap';
@@ -16,7 +17,7 @@ const CartScreen: React.FC<Props> = ({ id }) => {
   const history = useHistory();
   const location = useLocation();
 
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1;
+  const qty = location.search ? parseInt(location.search.split('=')[1]) : 1;
 
   const dispatch = useDispatch();
 
