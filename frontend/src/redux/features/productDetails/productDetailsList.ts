@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { Dispatch } from 'redux';
+import axios from "axios";
+import { Dispatch } from "redux";
 //Types or Actions
 import {
   LOAD_DETAILS_FULFILLED,
@@ -7,14 +7,14 @@ import {
   LOAD_DETAILS_REJECTED,
   ProductDetailsAction,
   ProductDetailsState,
-} from './types';
+} from "./types";
 
 //Reducer
 const initialState: ProductDetailsState = {
   //product: { reviews: []},
   product: undefined,
   loading: null,
-  error: '',
+  error: "",
 };
 export default function reducer(
   state = initialState,
@@ -22,7 +22,7 @@ export default function reducer(
 ): ProductDetailsState {
   switch (action.type) {
     case LOAD_DETAILS_PENDING:
-      return { loading: true, ...state };
+      return { ...state, loading: true };
     case LOAD_DETAILS_FULFILLED:
       return { loading: false, product: action.payload };
     case LOAD_DETAILS_REJECTED:

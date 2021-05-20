@@ -80,6 +80,7 @@ const ProductScreen: React.FC<Props> = () => {
                   </Col>
                 </Row>
               </ListGroup.Item>
+
               <ListGroup.Item>
                 <Row>
                   <Col>Status:</Col>
