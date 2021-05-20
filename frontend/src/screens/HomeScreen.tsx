@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Row, Col } from 'react-bootstrap';
-import Products from '../components/Products';
-import { Product } from '../types/Product';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
-import { listProducts } from '../redux/features/products/productList';
-import { useTypedSelector } from '../redux/store';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Row, Col } from "react-bootstrap";
+import Products from "../components/Products";
+import { Product } from "../types/Product";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
+import { listProducts } from "../redux/features/products/productList";
+import { useTypedSelector } from "../redux/store";
 
 interface Props {
   product: Product;
@@ -24,10 +24,12 @@ const HomeScreen: React.FC<Props> = () => {
 
   if (loading) return <Loader />;
   if (error || !(products instanceof Array))
-    return <Message variant='danger'>{error}</Message>;
+    return <Message variant="danger">{error}</Message>;
   return (
     <>
-      <h2>Latest Products</h2>
+      <h1>Welcome To SHEShop</h1>
+
+      <h2 style={{ textAlign: "center" }}>Latest Products</h2>
 
       <Row>
         {products.map((product: Product) => (
@@ -41,12 +43,3 @@ const HomeScreen: React.FC<Props> = () => {
 };
 
 export default HomeScreen;
-//  interface Params {
-//   id: string;
-// }
-
-// const { id } = useParams<Params>();
-// const product = products.find((p) => p._id === id);
-// if (!product) {
-//   return <div>Error 404! Not Found</div>;
-// }

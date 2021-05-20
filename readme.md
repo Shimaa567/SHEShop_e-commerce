@@ -1,1 +1,0 @@
-# SheShop e-commerce project
