@@ -16,21 +16,21 @@ import { payOrder } from "../redux/features/order/orderPay";
 interface Params {
   id: string;
 }
-declare var window: any;
+//declare var window: any;
 
 const OrderScreen: React.FC = () => {
   const { id: orderId } = useParams<Params>();
+  const [pageLoading, setPageLoading] = useState(true);
+  const [clientId, setClientId] = useState("");
+  //const [successPay, setSuccessPay] = useState(false)
 
   const [sdkReady, setSdkReady] = useState(false);
 
   const dispatch = useDispatch();
 
-  const orderCreate = useTypedSelector((state) => state.orderCreate);
-  const { order } = orderCreate;
-
   const orderDetails = useTypedSelector((state) => state.orderDetails);
-  const { loading, error } = orderDetails;
-  // order: orderInfo,
+  const { order, loading, error } = orderDetails;
+
   const orderPay = useTypedSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
 
@@ -43,38 +43,33 @@ const OrderScreen: React.FC = () => {
       .toFixed(2)
   );
 
-  const successPaymentHandler = (paymentResult: PaymentResult) => {
-    console.log(paymentResult);
-    dispatch(payOrder(order?._id, paymentResult));
-  };
+  // const successPaymentHandler = (paymentResult: PaymentResult) => {
+  //   console.log(paymentResult);
+  //   dispatch(payOrder(order?._id, paymentResult));
+  // };
 
   useEffect(() => {
-    const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get("/api/config/paypal");
-      //console.log(clientId);
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-      script.async = true;
-      script.onload = () => {
-        setSdkReady(true);
-      };
-      document.body.appendChild(script);
-      console.log(clientId);
-    };
-
     if (!order || successPay) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch(getOrderById(orderId));
-    } else if (!order.isPaid) {
-      if (!window.paypal) {
-        addPayPalScript();
-      }
     }
-    console.log(orderId, order);
   }, [dispatch, order, successPay, orderId]);
 
-  return loading ? (
+  useEffect(() => {
+    if (loading === false) {
+      setPageLoading(false);
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    (async () => {
+      const { data: clientId } = await axios.get("/api/config/paypal");
+      setClientId(clientId);
+      setSdkReady(true);
+    })();
+  });
+
+  return pageLoading ? (
     <Loader />
   ) : error ? (
     <Message variant="danger">{error}</Message>
@@ -189,10 +184,12 @@ const OrderScreen: React.FC = () => {
                   {!sdkReady ? (
                     <Loader />
                   ) : (
-                    <PayPalScriptProvider>
+                    <PayPalScriptProvider options={{ "client-id": clientId }}>
                       <PayPalButtons
-                        amount={order?.totalPrice}
-                        onSuccess={successPaymentHandler}
+                        style={{ layout: "vertical" }}
+                        onApprove={(paymentResult: PaymentResult) =>
+                          dispatch(payOrder(order?._id, paymentResult))
+                        }
                       />
                     </PayPalScriptProvider>
                   )}

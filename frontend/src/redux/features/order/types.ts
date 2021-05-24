@@ -15,8 +15,14 @@ export const ORDER_PAY_FULFILLED = "ORDER_PAY_FULFILLED";
 export const ORDER_PAY_REJECTED = "ORDER_PAY_REJECTED";
 export const ORDER_PAY_RESET = "ORDER_PAY_RESET";
 
+export const ORDER_MY_LIST_REQUEST = "ORDER_MY_LIST_REQUEST";
+export const ORDER_MY_LIST_FULFILLED = "ORDER_MY_LIST_FULFILLED";
+export const ORDER_MY_LIST_REJECTED = "ORDER_MY_LIST_REJECTED";
+export const ORDER_MY_LIST_RESET = "ORDER_MY_LIST_RESET";
+
 export interface OrderState {
-  order?: OrderInfo;
+  order?: OrderInfo | null;
+  orders?: Array<OrderInfo> | null;
   loading?: boolean | null;
   success?: boolean;
   error?: string;
@@ -31,6 +37,7 @@ export interface OrderInfo {
   shippingPrice?: number;
   taxPrice?: number;
   totalPrice?: number;
+  createdAt?: Date;
   isPaid?: boolean;
   paidAt?: Date;
   isDelivered?: boolean;
@@ -93,6 +100,24 @@ export interface OrderPayReset {
   type: typeof ORDER_PAY_RESET;
 }
 
+export interface OrderMyList {
+  type: typeof ORDER_MY_LIST_REQUEST;
+}
+
+export interface OrderMyListFulfilled {
+  type: typeof ORDER_MY_LIST_FULFILLED;
+  payload: Array<OrderInfo>;
+}
+
+export interface OrderMyListRejected {
+  type: typeof ORDER_MY_LIST_REJECTED;
+  payload: string;
+}
+
+export interface OrderMyListReset {
+  type: typeof ORDER_MY_LIST_RESET;
+}
+
 export type OrderActions =
   | OrderCreate
   | OrderCreateFulfilled
@@ -104,4 +129,8 @@ export type OrderActions =
   | OrderPay
   | OrderPayFulfilled
   | OrderPayRejected
-  | OrderPayReset;
+  | OrderPayReset
+  | OrderMyList
+  | OrderMyListFulfilled
+  | OrderMyListRejected
+  | OrderMyListReset;

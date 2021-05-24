@@ -1,45 +1,44 @@
-import { UserInfo } from "./../users/types";
+//Types
 import axios from "axios";
 import { Dispatch } from "redux";
 import { RootState } from "../../store";
 import {
-  USER_DETAILS_REQUEST,
-  USER_DETAILS_FULFILLED,
-  USER_DETAILS_REJECTED,
-  UserDetailsAction,
+  USER_LIST_REQUEST,
+  USER_LIST_FULFILLED,
+  USER_LIST_REJECTED,
+  USER_LIST_RESET,
+  UsersListActions,
   UserState,
-  USER_DETAILS_RESET,
 } from "./types";
 
 //Reducer
-const initialState: UserState = { user: {}, loading: null, error: "" };
-
+const initialState: UserState = { users: [] };
 export default function reducer(
   state = initialState,
-  action: UserDetailsAction
-): UserState {
+  action: UsersListActions
+) {
   switch (action.type) {
-    case USER_DETAILS_REQUEST:
+    case USER_LIST_REQUEST:
       return { loading: true };
-    case USER_DETAILS_FULFILLED:
-      return { loading: false, user: action.payload };
-    case USER_DETAILS_REJECTED:
+    case USER_LIST_FULFILLED:
+      return { loading: false, users: action.payload };
+    case USER_LIST_REJECTED:
       return { loading: false, error: action.payload };
-    case USER_DETAILS_RESET:
-      return { user: {} };
+    case USER_LIST_RESET:
+      return { users: [] };
     default:
       return state;
   }
 }
 
-//SideEffects
-export const getUserDetails = (id: string | undefined) => async (
+//Action Creator
+export const listUsers = () => async (
   dispatch: Dispatch,
   getState: () => RootState
 ) => {
   try {
     dispatch({
-      type: USER_DETAILS_REQUEST,
+      type: USER_LIST_REQUEST,
     });
 
     const {
@@ -51,15 +50,15 @@ export const getUserDetails = (id: string | undefined) => async (
       },
     };
 
-    const { data } = await axios.get<UserInfo>(`/api/users/${id}`, config);
+    const { data } = await axios.get(`/api/users`, config);
 
     dispatch({
-      type: USER_DETAILS_FULFILLED,
+      type: USER_LIST_FULFILLED,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: USER_DETAILS_REJECTED,
+      type: USER_LIST_REJECTED,
       payload: error?.response.data.message || error.message,
     });
   }

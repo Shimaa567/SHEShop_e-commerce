@@ -2,10 +2,10 @@ import axios from "axios";
 import { Dispatch } from "redux";
 //Types or Actions
 import {
-  LOAD_DETAILS_FULFILLED,
-  LOAD_DETAILS_PENDING,
-  LOAD_DETAILS_REJECTED,
-  ProductDetailsAction,
+  PRODUCT_DETAILS_FULFILLED,
+  PRODUCT_DETAILS_REQUEST,
+  PRODUCT_DETAILS_REJECTED,
+  ProductDetailsActions,
   ProductDetailsState,
 } from "./types";
 
@@ -18,14 +18,14 @@ const initialState: ProductDetailsState = {
 };
 export default function reducer(
   state = initialState,
-  action: ProductDetailsAction
+  action: ProductDetailsActions
 ): ProductDetailsState {
   switch (action.type) {
-    case LOAD_DETAILS_PENDING:
+    case PRODUCT_DETAILS_REQUEST:
       return { ...state, loading: true };
-    case LOAD_DETAILS_FULFILLED:
+    case PRODUCT_DETAILS_FULFILLED:
       return { loading: false, product: action.payload };
-    case LOAD_DETAILS_REJECTED:
+    case PRODUCT_DETAILS_REJECTED:
       return { loading: false, error: action.payload };
     default:
       return state;
@@ -37,16 +37,16 @@ export const listProductDetails = (id: string) => async (
   dispatch: Dispatch
 ) => {
   try {
-    dispatch({ type: LOAD_DETAILS_PENDING });
+    dispatch({ type: PRODUCT_DETAILS_REQUEST });
     const { data } = await axios.get(`/api/products/${id}`);
 
     dispatch({
-      type: LOAD_DETAILS_FULFILLED,
+      type: PRODUCT_DETAILS_FULFILLED,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: LOAD_DETAILS_REJECTED,
+      type: PRODUCT_DETAILS_REJECTED,
       payload: error.response?.data.message || error.message,
     });
   }

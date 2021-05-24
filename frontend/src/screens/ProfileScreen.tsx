@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Row, Col, Button, Form } from "react-bootstrap";
+import { Row, Col, Button, Form, Table } from "react-bootstrap";
 import { useTypedSelector } from "../redux/store";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { useDispatch } from "react-redux";
-import { userDetails } from "../redux/features/userDetails/userProfileDetails";
+import { getUserDetails } from "../redux/features/userDetails/userProfileDetails";
 import { updateUserProfile } from "../redux/features/profile/updateProfile";
+import { listMyOrders } from "../redux/features/order/orderMyList";
+import { LinkContainer } from "react-router-bootstrap";
 
 type Inputs = {
   name?: string;
@@ -15,10 +17,6 @@ type Inputs = {
   password: string;
   password_repeat: string;
 };
-
-// interface Params {
-//   id: string;
-// }
 
 const ProfileScreen: React.FC = () => {
   const {
@@ -44,14 +42,16 @@ const ProfileScreen: React.FC = () => {
   const userProfile = useTypedSelector((state) => state.updateUserProfile);
   const { success } = userProfile;
 
-  //const { id } = useParams<Params>();
+  const orderMyList = useTypedSelector((state) => state.orderList);
+  const { orders, loading: ordersLoading, error: ordersError } = orderMyList;
 
   useEffect(() => {
     if (!userInfo) {
       history.push("/login");
     } else {
       if (!user?.name) {
-        dispatch(userDetails("profile"));
+        dispatch(getUserDetails("profile"));
+        dispatch(listMyOrders());
       } else {
         setValue("email", user.email, { shouldValidate: true });
         setValue("name", user.name);
@@ -137,7 +137,64 @@ const ProfileScreen: React.FC = () => {
           </Button>
         </form>
       </Col>
-      <Col md={9}>My orders</Col>
+      <Col md={9}>
+        <h2>My Orders</h2>
+        {ordersLoading ? (
+          <Loader />
+        ) : ordersError ? (
+          <Message variant="danger">{ordersError}</Message>
+        ) : (
+          <Table striped bordered hover responsive className="table-sm">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>TOTAL</th>
+                <th>PAID</th>
+                <th>DELIVERED</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders?.map((order) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td>{order?.createdAt?.toString().substring(0, 10)}</td>
+                  <td>{order.totalPrice}</td>
+                  <td>
+                    {order?.isPaid ? (
+                      order?.paidAt?.toString().substring(0, 10)
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </td>
+                  <td>
+                    {order?.isDelivered ? (
+                      order?.deliveredAt?.toString().substring(0, 10)
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </td>
+                  <td>
+                    <LinkContainer to={`/order/${order?._id}`}>
+                      <Button variant="light" className="btn-sm">
+                        Details
+                      </Button>
+                    </LinkContainer>
+                    <Button
+                      variant="danger"
+                      className="btn-sm"
+                      //onClick={() => ()}
+                    >
+                      <i className="fas fa-trash"></i>
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
+      </Col>
     </Row>
   );
 };

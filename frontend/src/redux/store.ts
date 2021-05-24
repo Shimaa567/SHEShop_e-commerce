@@ -3,6 +3,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { useSelector, TypedUseSelectorHook } from "react-redux";
 import productList from "./features/products/productList";
 import productDetails from "./features/productDetails/productDetailsList";
+import productDelete from "./features/productDetails/productDelete";
 import cart from "./features/cartDetails/cart";
 import thunk from "redux-thunk";
 import { CartItem } from "./features/cartDetails/types";
@@ -10,9 +11,13 @@ import userLogin from "./features/users/user";
 import userRegister from "./features/register/UserRegister";
 import userDetails from "./features/userDetails/userProfileDetails";
 import updateUserProfile from "./features/profile/updateProfile";
+import userList from "./features/users/usersList";
+import userDelete from "./features/users/userDelete";
+import userUpdate from "./features/users/userUpdates";
 import orderCreate from "./features/order/orderCreate";
 import orderDetails from "./features/order/orderDetails";
 import orderPay from "./features/order/orderPay";
+import orderList from "./features/order/orderMyList";
 
 const cartItemsFromStorage: Array<CartItem> = localStorage.getItem("cartItems")
   ? JSON.parse(localStorage.getItem("cartItems") ?? "")
@@ -38,14 +43,19 @@ const middleware = [thunk];
 const reducer = combineReducers({
   productList,
   productDetails,
+  productDelete,
   cart,
   userLogin,
   userRegister,
   userDetails,
   updateUserProfile,
+  userList,
+  userDelete,
+  userUpdate,
   orderCreate,
   orderDetails,
   orderPay,
+  orderList,
 });
 const store = createStore(
   reducer,

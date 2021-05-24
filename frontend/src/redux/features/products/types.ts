@@ -1,25 +1,29 @@
-import { Product } from '../../../types/Product';
+import { Product } from "../../../types/Product";
 
-export const LOAD_PENDING = 'productList/LOAD_PENDING';
-export const LOAD_FULFILLED = 'productList/LOAD_FULFILLED';
-export const LOAD_REJECTED = 'productList/LOAD_REJECTED';
+export const PRODUCT_LIST_REQUEST = "PRODUCT_LIST_REQUEST";
+export const PRODUCT_LIST_FULFILLED = "PRODUCT_LIST_FULFILLED";
+export const PRODUCT_LIST_REJECTED = "PRODUCT_LIST_REJECTED";
 
 export interface ProductState {
   products?: Array<Product>;
-  loading: boolean | null;
+  loading?: boolean | null;
   error?: string;
+  success?: boolean | null;
 }
 
-export interface LoadPending {
-  type: typeof LOAD_PENDING;
+export interface ProductList {
+  type: typeof PRODUCT_LIST_REQUEST;
 }
-export interface LoadFulfilled {
-  type: typeof LOAD_FULFILLED;
+export interface ProductListFulfilled {
+  type: typeof PRODUCT_LIST_FULFILLED;
   payload: Array<Product>;
 }
-export interface LoadRejected {
-  type: typeof LOAD_REJECTED;
+export interface ProductListRejected {
+  type: typeof PRODUCT_LIST_REJECTED;
   payload: string;
 }
 
-export type ProductListAction = LoadPending | LoadFulfilled | LoadRejected;
+export type ProductListAction =
+  | ProductList
+  | ProductListFulfilled
+  | ProductListRejected;
