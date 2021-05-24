@@ -35,7 +35,6 @@ const LoginScreen: React.FC = () => {
   }, [userInfo, history, redirect]);
 
   const onSubmit = (data: Inputs) => {
-    console.log(data);
     const { email, password } = data;
     dispatch(login(email, password));
   };

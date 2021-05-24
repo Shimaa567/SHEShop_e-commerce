@@ -3,18 +3,17 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { RootState } from "../../store";
 import {
-  ORDER_DETAILS_REQUEST,
-  ORDER_DETAILS_FULFILLED,
-  ORDER_DETAILS_REJECTED,
+  ORDER_MY_LIST_REQUEST,
+  ORDER_MY_LIST_FULFILLED,
+  ORDER_MY_LIST_REJECTED,
+  ORDER_MY_LIST_RESET,
   OrderState,
   OrderActions,
-  //OrderInfo,
 } from "./types";
 
 //Reducer
 const initialState: OrderState = {
-  order: null,
-  //{ orderItems: [], shippingAddress: {} },
+  orders: [],
   loading: null, //loading not true
   error: "",
 };
@@ -23,45 +22,48 @@ export default function reducer(
   action: OrderActions
 ): OrderState {
   switch (action.type) {
-    case ORDER_DETAILS_REQUEST:
+    case ORDER_MY_LIST_REQUEST:
       return { ...state, loading: true };
-    case ORDER_DETAILS_FULFILLED:
-      return { loading: false, order: action.payload };
-    case ORDER_DETAILS_REJECTED:
+    case ORDER_MY_LIST_FULFILLED:
+      return { loading: false, orders: action.payload };
+    case ORDER_MY_LIST_REJECTED:
       return { loading: false, error: action.payload };
+    case ORDER_MY_LIST_RESET:
+      return { orders: [] };
     default:
       return state;
   }
 }
 
 //Action
-export const getOrderById = (id: string) => async (
+export const listMyOrders = () => async (
   dispatch: Dispatch,
   getState: () => RootState
 ) => {
   try {
     dispatch({
-      type: ORDER_DETAILS_REQUEST,
+      type: ORDER_MY_LIST_REQUEST,
     });
 
     const {
       userLogin: { userInfo },
     } = getState();
+
     const config = {
       headers: {
         Authorization: `Bearer ${userInfo?.token}`,
       },
     };
 
-    const { data } = await axios.get(`/api/orders/${id}`, config);
+    const { data } = await axios.get(`/api/orders/myorders`, config);
 
     dispatch({
-      type: ORDER_DETAILS_FULFILLED,
+      type: ORDER_MY_LIST_FULFILLED,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: ORDER_DETAILS_REJECTED,
+      type: ORDER_MY_LIST_REJECTED,
       payload: error?.response.data.message || error.message,
     });
   }

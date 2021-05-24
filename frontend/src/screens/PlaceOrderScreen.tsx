@@ -54,7 +54,7 @@ const PlaceOrderScreen: React.FC = () => {
   useEffect(() => {
     if (success) {
       history.push(`/orders/${order?._id}`);
-      //console.log(order?._id);
+      console.log(order?._id);
     }
   }, [history, success, order]);
 

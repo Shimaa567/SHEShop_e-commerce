@@ -1,5 +1,7 @@
+import { ORDER_MY_LIST_RESET } from "./../order/types";
 import axios from "axios";
 import { Dispatch } from "redux";
+import { USER_DETAILS_RESET } from "../userDetails/types";
 //Types
 import {
   UserState,
@@ -8,6 +10,7 @@ import {
   USER_LOGIN_FULFILLED,
   USER_LOGIN_REJECTED,
   USER_LOGOUT,
+  USER_LIST_RESET,
   UserInfo,
 } from "./types";
 
@@ -69,4 +72,7 @@ export const login = (email: string, password: string) => async (
 export const logout = () => (dispatch: Dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
+  dispatch({ type: USER_DETAILS_RESET });
+  dispatch({ type: ORDER_MY_LIST_RESET });
+  dispatch({ type: USER_LIST_RESET });
 };
