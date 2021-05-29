@@ -42,7 +42,7 @@ const ProfileScreen: React.FC = () => {
   const userProfile = useTypedSelector((state) => state.updateUserProfile);
   const { success } = userProfile;
 
-  const orderMyList = useTypedSelector((state) => state.orderList);
+  const orderMyList = useTypedSelector((state) => state.orderMyList);
   const { orders, loading: ordersLoading, error: ordersError } = orderMyList;
 
   useEffect(() => {

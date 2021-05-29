@@ -20,7 +20,19 @@ const Header: React.FC = () => {
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>SHEShop</Navbar.Brand>
+            <Navbar.Brand>
+              <img
+                src="/images/she.jpg"
+                alt=""
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  marginTop: "-5px",
+                  borderRadius: "80%",
+                }}
+              />{" "}
+              SHEShop
+            </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

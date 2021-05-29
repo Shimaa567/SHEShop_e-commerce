@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-//import { PayPalButton } from "react-paypal-button-v2";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
 import { useTypedSelector } from "../redux/store";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { useDispatch } from "react-redux";
 import { getOrderById } from "../redux/features/order/orderDetails";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
-import { ORDER_PAY_RESET, PaymentResult } from "../redux/features/order/types";
+import { Link, useHistory } from "react-router-dom";
+import {
+  ORDER_PAY_RESET,
+  PaymentResult,
+  ORDER_DELIVERED_RESET,
+} from "../redux/features/order/types";
 import { payOrder } from "../redux/features/order/orderPay";
+import { deliverOrder } from "../redux/features/order/orderDelivery";
 
 interface Params {
   id: string;
@@ -20,13 +24,13 @@ interface Params {
 
 const OrderScreen: React.FC = () => {
   const { id: orderId } = useParams<Params>();
+
   const [pageLoading, setPageLoading] = useState(true);
   const [clientId, setClientId] = useState("");
-  //const [successPay, setSuccessPay] = useState(false)
-
   const [sdkReady, setSdkReady] = useState(false);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const orderDetails = useTypedSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
@@ -34,8 +38,11 @@ const OrderScreen: React.FC = () => {
   const orderPay = useTypedSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
 
-  const user = useTypedSelector((state) => state.userLogin);
-  const { userInfo } = user;
+  const orderDeliver = useTypedSelector((state) => state.orderDeliver);
+  const { success: successDeliver } = orderDeliver;
+
+  const userLogin = useTypedSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   const itemsPrice = Number(
     order?.orderItems
@@ -43,21 +50,22 @@ const OrderScreen: React.FC = () => {
       .toFixed(2)
   );
 
-  // const successPaymentHandler = (paymentResult: PaymentResult) => {
-  //   console.log(paymentResult);
-  //   dispatch(payOrder(order?._id, paymentResult));
-  // };
-
   useEffect(() => {
-    if (!order || successPay) {
-      dispatch({ type: ORDER_PAY_RESET });
-      dispatch(getOrderById(orderId));
+    if (!userInfo) {
+      history.push("/login");
     }
-  }, [dispatch, order, successPay, orderId]);
+    if (!order || successPay || successDeliver || order._id !== orderId) {
+      dispatch({ type: ORDER_PAY_RESET });
+      dispatch({ type: ORDER_DELIVERED_RESET });
+      dispatch(getOrderById(orderId));
+      console.log(order?.user);
+    }
+  }, [dispatch, history, order, userInfo, successPay, orderId, successDeliver]);
 
   useEffect(() => {
     if (loading === false) {
       setPageLoading(false);
+      //console.log(order);
     }
   }, [loading]);
 
@@ -68,6 +76,10 @@ const OrderScreen: React.FC = () => {
       setSdkReady(true);
     })();
   });
+
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order));
+  };
 
   return pageLoading ? (
     <Loader />
@@ -82,11 +94,14 @@ const OrderScreen: React.FC = () => {
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
-                <strong>Name: </strong> {userInfo?.name}
+                <strong>Name: </strong> {order?.user?.name}
               </p>
               <p>
                 <strong>Email: </strong>{" "}
-                <a href={`mailto:${userInfo?.email}`}> {userInfo?.email}</a>
+                <a href={`mailto:${order?.user?.email}`}>
+                  {" "}
+                  {order?.user?.email}
+                </a>
               </p>
               <p>
                 <strong>Address: </strong>
@@ -195,6 +210,21 @@ const OrderScreen: React.FC = () => {
                   )}
                 </ListGroup.Item>
               )}
+
+              {userInfo &&
+                userInfo?.isAdmin &&
+                order?.isPaid &&
+                !order.isDelivered && (
+                  <ListGroup.Item>
+                    <Button
+                      type="button"
+                      className="btn btn-block"
+                      onClick={deliverHandler}
+                    >
+                      Mark As Delivered
+                    </Button>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>

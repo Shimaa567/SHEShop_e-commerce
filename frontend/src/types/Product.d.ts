@@ -1,13 +1,13 @@
 export interface Product {
   _id: string | number | undefined;
-  name: string;
-  image: string;
-  description: string;
-  brand: string;
-  category: string;
-  price: string | number;
-  countInStock: number;
+  name: string | undefined;
+  image: string | undefined;
+  description: string | undefined;
+  brand: string | undefined;
+  category: string | undefined;
+  price: string | number | undefined;
+  countInStock: number | string;
   rating: number;
-  numReviews: number;
-  reviews?: string[];
+  numReviews?: number | undefined;
+  reviews?: string[] | undefined;
 }

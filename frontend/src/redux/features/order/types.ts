@@ -1,3 +1,4 @@
+import { UserInfo } from "../users/types";
 import { CartItem } from "../cartDetails/types";
 import { ShippingAddress } from "../cartDetails/types";
 
@@ -19,6 +20,15 @@ export const ORDER_MY_LIST_REQUEST = "ORDER_MY_LIST_REQUEST";
 export const ORDER_MY_LIST_FULFILLED = "ORDER_MY_LIST_FULFILLED";
 export const ORDER_MY_LIST_REJECTED = "ORDER_MY_LIST_REJECTED";
 export const ORDER_MY_LIST_RESET = "ORDER_MY_LIST_RESET";
+
+export const ORDER_LIST_REQUEST = "ORDER_LIST_REQUEST";
+export const ORDER_LIST_FULFILLED = "ORDER_LIST_FULFILLED";
+export const ORDER_LIST_REJECTED = "ORDER_LIST_REJECTED";
+
+export const ORDER_DELIVERED_REQUEST = "ORDER_DELIVERED_REQUEST";
+export const ORDER_DELIVERED_FULFILLED = "ORDER_DELIVERED_FULFILLED";
+export const ORDER_DELIVERED_REJECTED = "ORDER_DELIVERED_REJECTED";
+export const ORDER_DELIVERED_RESET = "ORDER_DELIVERED_RESET";
 
 export interface OrderState {
   order?: OrderInfo | null;
@@ -42,6 +52,7 @@ export interface OrderInfo {
   paidAt?: Date;
   isDelivered?: boolean;
   deliveredAt?: Date;
+  user?: UserInfo;
 }
 
 export interface PaymentResult {
@@ -117,6 +128,48 @@ export interface OrderMyListRejected {
 export interface OrderMyListReset {
   type: typeof ORDER_MY_LIST_RESET;
 }
+
+export interface OrderList {
+  type: typeof ORDER_LIST_REQUEST;
+}
+
+export interface OrderListFulfilled {
+  type: typeof ORDER_LIST_FULFILLED;
+  payload: Array<OrderInfo>;
+}
+
+export interface OrderListRejected {
+  type: typeof ORDER_LIST_REJECTED;
+  payload: string;
+}
+
+export interface OrderDeliver {
+  type: typeof ORDER_DELIVERED_REQUEST;
+}
+
+export interface OrderDeliverFulfilled {
+  type: typeof ORDER_DELIVERED_FULFILLED;
+}
+
+export interface OrderDeliverRejected {
+  type: typeof ORDER_DELIVERED_REJECTED;
+  payload: string;
+}
+
+export interface OrderDeliverReset {
+  type: typeof ORDER_DELIVERED_RESET;
+}
+
+export type OrderListActions =
+  | OrderList
+  | OrderListFulfilled
+  | OrderListRejected;
+
+export type OrderDeliverActions =
+  | OrderDeliver
+  | OrderDeliverFulfilled
+  | OrderDeliverRejected
+  | OrderDeliverReset;
 
 export type OrderActions =
   | OrderCreate

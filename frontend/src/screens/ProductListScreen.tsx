@@ -8,6 +8,8 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { listProducts } from "../redux/features/products/productList";
 import { deleteProduct } from "../redux/features/productDetails/productDelete";
+import { createProduct } from "../redux/features/productDetails/productCreate";
+import { PRODUCT_CREATE_RESET } from "../redux/features/productDetails/types";
 
 const ProductListScreen: React.FC = () => {
   const dispatch = useDispatch();
@@ -26,21 +28,42 @@ const ProductListScreen: React.FC = () => {
     success: successDelete,
   } = productDelete;
 
+  const productCreate = useTypedSelector((state) => state.productCreate);
+  const {
+    loading: loadingCreate,
+    success: successCreate,
+    error: errorCreate,
+    product: createdProduct,
+  } = productCreate;
+
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listProducts());
-    } else {
+    dispatch({ type: PRODUCT_CREATE_RESET });
+    if (!userInfo?.isAdmin) {
       history.push("/login");
     }
-  }, [dispatch, userInfo, history, successDelete]);
+    if (successCreate) {
+      history.push(`/admin/product/${createdProduct?._id}/edit`);
+    } else {
+      dispatch(listProducts());
+    }
+  }, [
+    dispatch,
+    userInfo,
+    history,
+    successDelete,
+    successCreate,
+    createdProduct,
+  ]);
 
   const deleteHandler = (id: string | number | undefined) => {
-    if (window.confirm("Are you sure you want to delete this user?")) {
+    if (window.confirm("Are you sure you want to delete this product?")) {
       dispatch(deleteProduct(id));
     }
   };
 
-  const createProductHandler = () => {};
+  const createProductHandler = () => {
+    dispatch(createProduct());
+  };
 
   return (
     <>
@@ -49,6 +72,8 @@ const ProductListScreen: React.FC = () => {
           <h1>Products</h1>
           {loadingDelete && <Loader />}
           {errorDelete && <Message variant="danger">{errorDelete}</Message>}
+          {loadingCreate && <Loader />}
+          {errorCreate && <Message variant="danger">{errorCreate}</Message>}
           <Col className="text-right">
             <Button className="my-3" onClick={createProductHandler}>
               <i className="fas fa-plus"></i> Create Product

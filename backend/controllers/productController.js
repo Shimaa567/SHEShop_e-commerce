@@ -26,9 +26,9 @@ const getProductById = asyncHandler(async (req, res) => {
   }
 });
 
-// //@desc    Delete Product
+// //@desc    Delete a product
 // //@route   DELETE /api/products/:id
-// //@access  Private
+// //@access  Private/Admin
 
 const deleteProduct = asyncHandler(async (req, res) => {
   const product = await Products.findById(req.params.id);
@@ -42,4 +42,65 @@ const deleteProduct = asyncHandler(async (req, res) => {
   }
 });
 
-export { getProducts, getProductById, deleteProduct };
+// //@desc    Create a product
+// //@route   POST /api/products
+// //@access  Private/Admin
+
+const createProduct = asyncHandler(async (req, res) => {
+  const product = await Products({
+    name: "Sample name",
+    image: "/images/sample.jpg",
+    description: "Sample description",
+    brand: "Sample brand",
+    category: "Sample category ",
+    price: 0,
+    countInStock: 0,
+    rating: 0,
+    numReviews: 0,
+    user: req.user._id,
+  });
+
+  const createdProduct = await product.save();
+  res.status(201).json(createdProduct);
+});
+
+// //@desc    Update a product
+// //@route   PUT /api/products
+// //@access  Private/Admin
+
+const updateProduct = asyncHandler(async (req, res) => {
+  const {
+    name,
+    image,
+    description,
+    brand,
+    category,
+    price,
+    countInStock,
+  } = req.body;
+  const product = await Products.findById(req.params.id);
+
+  if (product) {
+    product.name = name;
+    product.image = image;
+    product.description = description;
+    product.brand = brand;
+    product.category = category;
+    product.price = price;
+    product.countInStock = countInStock;
+
+    const updatedProduct = await product.save();
+    res.json(updatedProduct);
+  } else {
+    res.status(404);
+    throw new Error("Product Not Found");
+  }
+});
+
+export {
+  getProducts,
+  getProductById,
+  deleteProduct,
+  createProduct,
+  updateProduct,
+};

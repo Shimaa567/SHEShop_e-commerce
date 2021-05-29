@@ -10,20 +10,11 @@ import { getUserDetails } from "../redux/features/userDetails/userProfileDetails
 import { updateUser } from "../redux/features/users/userUpdates";
 import { USER_UPDATE_RESET } from "../redux/features/users/types";
 
-// type Inputs = {
-//   name: string;
-//   email: string;
-//   isAdmin: boolean;
-// };
-
 interface Params {
   id: string;
 }
 
 const UserEditScreen: React.FC = () => {
-  //   const { handleSubmit, errors, register, setValue } = useForm<Inputs>({
-  //     mode: "onChange",
-  //   });
   const { id: userId } = useParams<Params>();
 
   const [name, setName] = useState<string | undefined>("");

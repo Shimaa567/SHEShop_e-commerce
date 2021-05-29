@@ -4,6 +4,8 @@ import { useSelector, TypedUseSelectorHook } from "react-redux";
 import productList from "./features/products/productList";
 import productDetails from "./features/productDetails/productDetailsList";
 import productDelete from "./features/productDetails/productDelete";
+import productCreate from "./features/productDetails/productCreate";
+import productUpdate from "./features/productDetails/productUpdate";
 import cart from "./features/cartDetails/cart";
 import thunk from "redux-thunk";
 import { CartItem } from "./features/cartDetails/types";
@@ -17,7 +19,9 @@ import userUpdate from "./features/users/userUpdates";
 import orderCreate from "./features/order/orderCreate";
 import orderDetails from "./features/order/orderDetails";
 import orderPay from "./features/order/orderPay";
-import orderList from "./features/order/orderMyList";
+import orderDeliver from "./features/order/orderDelivery";
+import orderMyList from "./features/order/orderMyList";
+import orderList from "./features/order/orderList";
 
 const cartItemsFromStorage: Array<CartItem> = localStorage.getItem("cartItems")
   ? JSON.parse(localStorage.getItem("cartItems") ?? "")
@@ -44,6 +48,8 @@ const reducer = combineReducers({
   productList,
   productDetails,
   productDelete,
+  productCreate,
+  productUpdate,
   cart,
   userLogin,
   userRegister,
@@ -55,6 +61,8 @@ const reducer = combineReducers({
   orderCreate,
   orderDetails,
   orderPay,
+  orderDeliver,
+  orderMyList,
   orderList,
 });
 const store = createStore(
