@@ -7,8 +7,9 @@ export const PRODUCT_LIST_REJECTED = "PRODUCT_LIST_REJECTED";
 export interface ProductState {
   products?: Array<Product>;
   loading?: boolean | null;
-  error?: string;
+  error?: string | null;
   success?: boolean | null;
+  product?: Product;
 }
 
 export interface ProductList {

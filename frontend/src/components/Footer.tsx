@@ -1,12 +1,41 @@
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import React from "react";
+import { Container, Row, Col, Image } from "react-bootstrap";
 
 const Footer: React.FC = () => {
   return (
     <footer>
       <Container>
         <Row>
-          <Col className='text-center py-3'>Copyrights &copy; SHEShop</Col>
+          <Col className="text-left py-3">Copyrights &copy; SHEShop</Col>
+
+          <Col style={{ marginLeft: "445px", marginTop: "10px" }}>
+            Follow Us on:
+            <Image
+              src="/images/social/facebook.png"
+              alt=""
+              className="px-2"
+            ></Image>
+            <Image
+              src="/images/social/twitter.png"
+              alt=""
+              className="pr-2"
+            ></Image>
+            <Image
+              src="/images/social/instagram.png"
+              alt=""
+              className="pr-2"
+            ></Image>
+            <Image
+              src="/images/social/pinterest.png"
+              alt=""
+              className="pr-2"
+            ></Image>
+            {/* <Image
+              src="/images/social/visa.png"
+              alt=""
+              className="px-2"
+            ></Image> */}
+          </Col>
         </Row>
       </Container>
     </footer>

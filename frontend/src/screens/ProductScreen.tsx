@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, useParams, useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useParams, useHistory } from "react-router-dom";
 import {
   Row,
   Col,
@@ -9,13 +9,13 @@ import {
   Card,
   Button,
   Form,
-} from 'react-bootstrap';
-import Rating from '../components/Rating';
-import { Product } from '../types/Product';
-import { useTypedSelector } from '../redux/store';
-import { listProductDetails } from '../redux/features/productDetails/productDetailsList';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
+} from "react-bootstrap";
+import Rating from "../components/Rating";
+import { Product } from "../types/Product";
+import { useTypedSelector } from "../redux/store";
+import { listProductDetails } from "../redux/features/productDetails/productDetailsList";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 interface Props {
   product: Product;
@@ -44,10 +44,10 @@ const ProductScreen: React.FC<Props> = () => {
     history.push(`/cart/${id}?qty=${qty}`);
   };
   if (loading) return <Loader />;
-  if (error || !product) return <Message variant='danger'>{error}</Message>;
+  if (error || !product) return <Message variant="danger">{error}</Message>;
   return (
     <>
-      <Link className='btn btn-light my-3' to='/'>
+      <Link className="btn btn-light my-3" to="/">
         Go Back
       </Link>
       <Row>
@@ -55,7 +55,7 @@ const ProductScreen: React.FC<Props> = () => {
           <Image src={product.image} alt={product.name} fluid />
         </Col>
         <Col md={3}>
-          <ListGroup variant='flush'>
+          <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>{product.name}</h2>
             </ListGroup.Item>
@@ -71,7 +71,7 @@ const ProductScreen: React.FC<Props> = () => {
         </Col>
         <Col md={3}>
           <Card>
-            <ListGroup variant='flush'>
+            <ListGroup variant="flush">
               <ListGroup.Item>
                 <Row>
                   <Col>Price:</Col>
@@ -85,7 +85,7 @@ const ProductScreen: React.FC<Props> = () => {
                 <Row>
                   <Col>Status:</Col>
                   <Col>
-                    {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
+                    {product.countInStock > 0 ? "In Stock" : "Out of Stock"}
                   </Col>
                 </Row>
               </ListGroup.Item>
@@ -96,7 +96,7 @@ const ProductScreen: React.FC<Props> = () => {
                     <Col>Qty</Col>
                     <Col>
                       <Form.Control
-                        as='select'
+                        as="select"
                         value={qty}
                         onChange={(e) => setQty(e.target.value)}
                       >
@@ -114,8 +114,8 @@ const ProductScreen: React.FC<Props> = () => {
               <ListGroup.Item>
                 <Button
                   onClick={addToCartHandler}
-                  className='btn-block'
-                  type='button'
+                  className="btn-block"
+                  type="button"
                   disabled={product.countInStock === 0}
                 >
                   Add To Cart

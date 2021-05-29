@@ -8,6 +8,16 @@ export const PRODUCT_DELETE_REQUEST = "PRODUCT_DELETE_REQUEST";
 export const PRODUCT_DELETE_FULFILLED = "PRODUCT_DELETE_FULFILLED";
 export const PRODUCT_DELETE_REJECTED = "PRODUCT_DELETE_REJECTED";
 
+export const PRODUCT_CREATE_REQUEST = "PRODUCT_CREATE_REQUEST";
+export const PRODUCT_CREATE_FULFILLED = "PRODUCT_CREATE_FULFILLED";
+export const PRODUCT_CREATE_REJECTED = "PRODUCT_CREATE_REJECTED";
+export const PRODUCT_CREATE_RESET = "PRODUCT_CREATE_RESET";
+
+export const PRODUCT_UPDATE_REQUEST = "PRODUCT_UPDATE_REQUEST";
+export const PRODUCT_UPDATE_FULFILLED = "PRODUCT_UPDATE_FULFILLED";
+export const PRODUCT_UPDATE_REJECTED = "PRODUCT_UPDATE_REJECTED";
+export const PRODUCT_UPDATE_RESET = "PRODUCT_UPDATE_RESET";
+
 export interface ProductDetailsState {
   product?: Product;
   loading: boolean | null;
@@ -38,6 +48,36 @@ export interface ProductDeleteRejected {
   payload: string;
 }
 
+export interface ProductCreate {
+  type: typeof PRODUCT_CREATE_REQUEST;
+}
+export interface ProductCreateFulfilled {
+  type: typeof PRODUCT_CREATE_FULFILLED;
+  payload: Product;
+}
+export interface ProductCreateRejected {
+  type: typeof PRODUCT_CREATE_REJECTED;
+  payload: string;
+}
+export interface ProductCreateReset {
+  type: typeof PRODUCT_CREATE_RESET;
+}
+
+export interface ProductUpdate {
+  type: typeof PRODUCT_UPDATE_REQUEST;
+}
+export interface ProductUpdateFulfilled {
+  type: typeof PRODUCT_UPDATE_FULFILLED;
+  payload: Product;
+}
+export interface ProductUpdateRejected {
+  type: typeof PRODUCT_UPDATE_REJECTED;
+  payload: string;
+}
+export interface ProductUpdateReset {
+  type: typeof PRODUCT_UPDATE_RESET;
+}
+
 export type ProductDetailsActions =
   | ProductDetails
   | ProductDetailsFulfilled
@@ -47,3 +87,15 @@ export type ProductDeleteActions =
   | ProductDelete
   | ProductDeleteFulfilled
   | ProductDeleteRejected;
+
+export type ProductCreateActions =
+  | ProductCreate
+  | ProductCreateFulfilled
+  | ProductCreateRejected
+  | ProductCreateReset;
+
+export type ProductUpdateActions =
+  | ProductUpdate
+  | ProductUpdateFulfilled
+  | ProductUpdateRejected
+  | ProductUpdateReset;
