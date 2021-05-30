@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import path from "path";
-import mongoose from "mongoose";
+//import mongoose from "mongoose";
 import colors from "colors";
 import morgan from "morgan";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
@@ -17,20 +17,6 @@ dotenv.config();
 connectDB();
 
 const app = express();
-
-const url = process.env.MONGODB_URI;
-mongoose.connect(url, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});
-mongoose.connect(url, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});
 
 app.use(express.json());
 
