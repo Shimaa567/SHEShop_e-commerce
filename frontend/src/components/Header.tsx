@@ -4,6 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { useTypedSelector } from "../redux/store";
 import { logout } from "../redux/features/users/user";
+import SearchBox from "./SearchBox";
 
 const Header: React.FC = () => {
   const userLogin = useTypedSelector((state) => state.userLogin);
@@ -36,6 +37,7 @@ const Header: React.FC = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
+            <SearchBox />
             <Nav className="ml-auto">
               <LinkContainer to="/cart">
                 <Nav.Link>

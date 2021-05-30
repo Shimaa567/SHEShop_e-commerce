@@ -9,5 +9,5 @@ export interface Product {
   countInStock: number | string;
   rating: number;
   numReviews?: number | undefined;
-  reviews?: string[] | undefined;
+  reviews?: [] | undefined;
 }

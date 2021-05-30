@@ -14,8 +14,11 @@ import Rating from "../components/Rating";
 import { Product } from "../types/Product";
 import { useTypedSelector } from "../redux/store";
 import { listProductDetails } from "../redux/features/productDetails/productDetailsList";
+import { reviewProduct } from "../redux/features/productDetails/productReview";
+import { PRODUCT_CREATE_REVIEW_RESET } from "../redux/features/productDetails/types";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import Meta from "../components/Meta";
 
 interface Props {
   product: Product;
@@ -23,30 +26,63 @@ interface Props {
 interface Params {
   id: string;
 }
-//Check the history
+
+interface Review {
+  _id: string | number;
+  name: string;
+  rating: number | string;
+  comment: string;
+  user: string;
+  createdAt: Date;
+}
 
 const ProductScreen: React.FC<Props> = () => {
   const [qty, setQty] = useState<number | string>(1);
+  const [rating, setRating] = useState<number | string>(0);
+  const [comment, setComment] = useState<string>("");
 
-  //custom useSelector (state.reducer)
-  const productDetails = useTypedSelector((state) => state.productDetails);
-  const { loading, product, error } = productDetails;
   const { id } = useParams<Params>();
 
+  //custom useSelector (state.reducer)
+
+  const userLogin = useTypedSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const productDetails = useTypedSelector((state) => state.productDetails);
+  const { loading, product, error } = productDetails;
+
+  const productReview = useTypedSelector((state) => state.productCreateReview);
+  const { success: successReview, error: errorReview } = productReview;
+
   const dispatch = useDispatch();
+  const history = useHistory();
 
   //Check here
   useEffect(() => {
+    if (successReview) {
+      alert("Review Submitted, Thank You !");
+      setRating(0);
+      setComment("");
+      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
+    }
     dispatch(listProductDetails(id));
-  }, [dispatch, id]);
-  const history = useHistory();
+  }, [dispatch, id, successReview]);
+
   const addToCartHandler = () => {
     history.push(`/cart/${id}?qty=${qty}`);
   };
+
+  const submitHandler = (e: any) => {
+    e.preventDefault();
+    dispatch(reviewProduct(id, { rating, comment }));
+  };
+
   if (loading) return <Loader />;
   if (error || !product) return <Message variant="danger">{error}</Message>;
+
   return (
     <>
+      <Meta title={product.name} />
       <Link className="btn btn-light my-3" to="/">
         Go Back
       </Link>
@@ -123,6 +159,66 @@ const ProductScreen: React.FC<Props> = () => {
               </ListGroup.Item>
             </ListGroup>
           </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={6}>
+          <h2>Reviews</h2>
+          {product.reviews?.length === 0 && <Message>No Reviews yet!</Message>}
+          <ListGroup variant="flush">
+            {product.reviews?.map((review: Review) => (
+              <ListGroup.Item key={review._id}>
+                <strong>{review.name}</strong>
+                <Rating value={Number(review.rating)} />
+                <p>{review.createdAt.toString().substring(0, 10)}</p>
+                <p>{review.comment}</p>
+              </ListGroup.Item>
+            ))}
+            <ListGroup.Item>
+              <h1>Write a Review</h1>
+              {errorReview && <Message variant="danger">{errorReview}</Message>}
+              {userInfo ? (
+                <Form onSubmit={submitHandler}>
+                  <Form.Group controlId="rating">
+                    <Form.Label>Rating</Form.Label>
+                    <Form.Control
+                      as="select"
+                      value={rating}
+                      onChange={(e) => setRating(e.target.value)}
+                    >
+                      <option value="">Select..</option>
+                      <option value="1">1 - Poor</option>
+                      <option value="2">2 - Fair</option>
+                      <option value="3">3 - Good</option>
+                      <option value="4">4 - Very Good</option>
+                      <option value="5">5 - Excellent</option>
+                    </Form.Control>
+                  </Form.Group>
+                  <Form.Group controlId="comment">
+                    <Form.Label>Comment</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                      placeholder="Leave a Comment.."
+                    ></Form.Control>
+                    <Button
+                      style={{ marginTop: "20px" }}
+                      type="submit"
+                      variant="primary"
+                    >
+                      {" "}
+                      Submit{" "}
+                    </Button>
+                  </Form.Group>
+                </Form>
+              ) : (
+                <Message>
+                  Please <Link to="/login">Sign in</Link> to write a review
+                </Message>
+              )}
+            </ListGroup.Item>
+          </ListGroup>
         </Col>
       </Row>
     </>

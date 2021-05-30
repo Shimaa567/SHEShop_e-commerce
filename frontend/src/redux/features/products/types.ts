@@ -6,6 +6,8 @@ export const PRODUCT_LIST_REJECTED = "PRODUCT_LIST_REJECTED";
 
 export interface ProductState {
   products?: Array<Product>;
+  page?: string | number;
+  pages?: string | number;
   loading?: boolean | null;
   error?: string | null;
   success?: boolean | null;
@@ -17,7 +19,7 @@ export interface ProductList {
 }
 export interface ProductListFulfilled {
   type: typeof PRODUCT_LIST_FULFILLED;
-  payload: Array<Product>;
+  payload: ProductState;
 }
 export interface ProductListRejected {
   type: typeof PRODUCT_LIST_REJECTED;

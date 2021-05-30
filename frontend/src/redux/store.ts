@@ -5,7 +5,9 @@ import productList from "./features/products/productList";
 import productDetails from "./features/productDetails/productDetailsList";
 import productDelete from "./features/productDetails/productDelete";
 import productCreate from "./features/productDetails/productCreate";
+import productCreateReview from "./features/productDetails/productReview";
 import productUpdate from "./features/productDetails/productUpdate";
+import productTopRated from "./features/productDetails/productTopRated";
 import cart from "./features/cartDetails/cart";
 import thunk from "redux-thunk";
 import { CartItem } from "./features/cartDetails/types";
@@ -50,6 +52,8 @@ const reducer = combineReducers({
   productDelete,
   productCreate,
   productUpdate,
+  productCreateReview,
+  productTopRated,
   cart,
   userLogin,
   userRegister,
