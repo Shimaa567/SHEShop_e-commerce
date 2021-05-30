@@ -1,3 +1,4 @@
+import { ProductState } from "./../products/types";
 import { Product } from "../../../types/Product";
 
 export const PRODUCT_DETAILS_REQUEST = "PRODUCT_DETAILS_REQUEST";
@@ -18,10 +19,28 @@ export const PRODUCT_UPDATE_FULFILLED = "PRODUCT_UPDATE_FULFILLED";
 export const PRODUCT_UPDATE_REJECTED = "PRODUCT_UPDATE_REJECTED";
 export const PRODUCT_UPDATE_RESET = "PRODUCT_UPDATE_RESET";
 
+export const PRODUCT_CREATE_REVIEW_REQUEST = "PRODUCT_CREATE_REVIEW_REQUEST";
+export const PRODUCT_CREATE_REVIEW_FULFILLED =
+  "PRODUCT_CREATE_REVIEW_FULFILLED";
+export const PRODUCT_CREATE_REVIEW_REJECTED = "PRODUCT_CREATE_REVIEW_REJECTED";
+export const PRODUCT_CREATE_REVIEW_RESET = "PRODUCT_CREATE_REVIEW_RESET";
+
+export const PRODUCT_TOP_REQUEST = "PRODUCT_TOP_REQUEST";
+export const PRODUCT_TOP_FULFILLED = "PRODUCT_TOP_FULFILLED";
+export const PRODUCT_TOP_REJECTED = "PRODUCT_TOP_REJECTED";
+
 export interface ProductDetailsState {
   product?: Product;
-  loading: boolean | null;
+  loading?: boolean | null;
   error?: string;
+  success?: boolean | null;
+  //productReview?: ProductReview;
+}
+
+export interface ProductReview {
+  _id?: string | number | undefined;
+  rating?: number | string;
+  comment?: string;
 }
 
 export interface ProductDetails {
@@ -78,6 +97,32 @@ export interface ProductUpdateReset {
   type: typeof PRODUCT_UPDATE_RESET;
 }
 
+export interface ProductCreateReview {
+  type: typeof PRODUCT_CREATE_REVIEW_REQUEST;
+}
+export interface ProductCreateReviewFulfilled {
+  type: typeof PRODUCT_CREATE_REVIEW_FULFILLED;
+}
+export interface ProductCreateReviewRejected {
+  type: typeof PRODUCT_CREATE_REVIEW_REJECTED;
+  payload: string;
+}
+export interface ProductCreateReviewReset {
+  type: typeof PRODUCT_CREATE_REVIEW_RESET;
+}
+
+export interface ProductTopRated {
+  type: typeof PRODUCT_TOP_REQUEST;
+}
+export interface ProductTopRatedFulfilled {
+  type: typeof PRODUCT_TOP_FULFILLED;
+  payload: ProductState;
+}
+export interface ProductTopRatedRejected {
+  type: typeof PRODUCT_TOP_REJECTED;
+  payload: string;
+}
+
 export type ProductDetailsActions =
   | ProductDetails
   | ProductDetailsFulfilled
@@ -99,3 +144,14 @@ export type ProductUpdateActions =
   | ProductUpdateFulfilled
   | ProductUpdateRejected
   | ProductUpdateReset;
+
+export type ProductCreateReviewActions =
+  | ProductCreateReview
+  | ProductCreateReviewFulfilled
+  | ProductCreateReviewRejected
+  | ProductCreateReviewReset;
+
+export type ProductTopRatedActions =
+  | ProductTopRated
+  | ProductTopRatedFulfilled
+  | ProductTopRatedRejected;

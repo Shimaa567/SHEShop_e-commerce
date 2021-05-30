@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Carousel } from "react-bootstrap";
 
-const CarouselModel = () => {
+const CarouselModel: React.FC = () => {
   const [index, setIndex] = useState(0);
   const handleSelect = (selectedIndex: number, e: any) => {
     setIndex(selectedIndex);
@@ -88,7 +88,6 @@ const CarouselModel = () => {
           alt="sixth slide"
           style={{ width: "1060px", height: "800px" }}
         />
-        005098
         <Carousel.Caption>
           <h4 style={{ color: "#005098" }}>👗 Your Elegance is our Passion</h4>
         </Carousel.Caption>
