@@ -20,6 +20,7 @@ const SearchBox = () => {
       <Form.Control
         type="text"
         name="q"
+        id="search-box"
         onChange={(e) => setKeyword(e.target.value)}
         placeholder="Search Products Here..."
         className="m-auto mr-sm-2 ml-sm-5"

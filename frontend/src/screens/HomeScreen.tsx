@@ -35,9 +35,6 @@ const HomeScreen: React.FC<Props> = () => {
     dispatch(listProducts(keyword, pageNumber));
   }, [dispatch, keyword, pageNumber]);
 
-  // if (loading) return <Loader />;
-  // if (error || !(products instanceof Array))
-  //   return <Message variant="danger">{error}</Message>;
   return (
     <>
       <Meta />
@@ -56,6 +53,7 @@ const HomeScreen: React.FC<Props> = () => {
       ) : (
         <>
           <h2
+            id="home-title"
             style={{
               textAlign: "center",
               paddingTop: "25px",
