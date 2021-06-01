@@ -32,6 +32,7 @@ const ProductCarousel = () => {
               width: "max-content",
               marginBottom: "15px",
             }}
+            className="new-arrive"
           >
             <Image
               src="/images/new.gif"

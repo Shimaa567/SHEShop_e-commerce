@@ -12,27 +12,29 @@ const Footer: React.FC = () => {
             id="social-icons"
             style={{ marginLeft: "445px", marginTop: "10px" }}
           >
-            Follow Us on:
-            <Image
-              src="/images/social/facebook.png"
-              alt=""
-              className="px-2"
-            ></Image>
-            <Image
-              src="/images/social/twitter.png"
-              alt=""
-              className="pr-2"
-            ></Image>
-            <Image
-              src="/images/social/instagram.png"
-              alt=""
-              className="pr-2"
-            ></Image>
-            <Image
-              src="/images/social/pinterest.png"
-              alt=""
-              className="pr-2"
-            ></Image>
+            <p>Follow Us on:</p>
+            <div>
+              <Image
+                src="/images/social/facebook.png"
+                alt=""
+                className="px-2"
+              ></Image>
+              <Image
+                src="/images/social/twitter.png"
+                alt=""
+                className="pr-2"
+              ></Image>
+              <Image
+                src="/images/social/instagram.png"
+                alt=""
+                className="pr-2"
+              ></Image>
+              <Image
+                src="/images/social/pinterest.png"
+                alt=""
+                className="pr-2"
+              ></Image>
+            </div>
           </Col>
         </Row>
       </Container>
