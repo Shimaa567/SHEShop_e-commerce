@@ -37,12 +37,15 @@ const RegisterScreen: React.FC<Inputs> = () => {
   }, [userInfo, history, redirect]);
 
   const onSubmit = (data: Inputs) => {
-    console.log(data);
     const { name, email, password, password_repeat } = data;
     if (password !== password_repeat) {
       setError("password_repeat", { message: `The two passwords don't match` });
     } else {
       dispatch(registerUser(name, email, password, password_repeat));
+
+      alert("Your Registration has been Completed Successfully");
+
+      history.push("/");
     }
   };
 
