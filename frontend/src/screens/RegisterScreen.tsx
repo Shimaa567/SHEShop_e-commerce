@@ -43,6 +43,9 @@ const RegisterScreen: React.FC<Inputs> = () => {
       setError("password_repeat", { message: `The two passwords don't match` });
     } else {
       dispatch(registerUser(name, email, password, password_repeat));
+      alert("Your Registration has been Completed Successfully");
+
+      history.push("/");
     }
   };
 
