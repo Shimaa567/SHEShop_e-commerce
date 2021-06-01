@@ -19,13 +19,14 @@ const ProductCarousel = () => {
           <CarouselModel />
         </Col>
 
-        <Col md={2} style={{ marginLeft: "155px" }}>
+        <Col md={2} style={{ marginLeft: "155px" }} className="collection">
           <div
             style={{
               display: "inline-block",
               width: "max-content",
               marginBottom: "15px",
             }}
+            className="new-arrive"
           >
             <img
               src="/images/new.gif"
@@ -37,6 +38,7 @@ const ProductCarousel = () => {
             </h4>
           </div>
           <img
+            id="coll-img"
             src="/images/collection.gif"
             alt=""
             style={{ width: "350px", height: "100%" }}

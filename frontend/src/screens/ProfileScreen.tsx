@@ -50,7 +50,7 @@ const ProfileScreen: React.FC = () => {
       history.push("/login");
     } else {
       if (!user?.name) {
-        dispatch(getUserDetails("profile"));
+        dispatch(getUserDetails(`profile/${userInfo._id}`));
         dispatch(listMyOrders());
       } else {
         setValue("email", user.email, { shouldValidate: true });

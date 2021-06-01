@@ -8,7 +8,10 @@ const Footer: React.FC = () => {
         <Row>
           <Col className="text-left py-3">Copyrights &copy; SHEShop</Col>
 
-          <Col style={{ marginLeft: "445px", marginTop: "10px" }}>
+          <Col
+            style={{ marginLeft: "445px", marginTop: "10px" }}
+            id="social-icons"
+          >
             Follow Us on:
             <Image
               src="/images/social/facebook.png"
@@ -30,11 +33,6 @@ const Footer: React.FC = () => {
               alt=""
               className="pr-2"
             ></Image>
-            {/* <Image
-              src="/images/social/visa.png"
-              alt=""
-              className="px-2"
-            ></Image> */}
           </Col>
         </Row>
       </Container>
