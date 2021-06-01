@@ -98,11 +98,11 @@ h2 {
 /* // Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
   .carousel-inner {
-    width: 420px;
+    width: 550px;
     margin-left: 130px;
   }
   .carousel-inner img {
-    width: 390px;
+    width: 445px;
     height: 600px;
   }
   .carousel-indicators {
@@ -117,6 +117,9 @@ h2 {
   .new-arrive {
     margin-left: 45px;
   }
+  .collection {
+    margin-left: 60px;
+  }
   #coll-img {
     margin-left: 10px;
   }
@@ -126,6 +129,7 @@ h2 {
 
   #social-icons {
     margin-top: 16px !important;
+    margin-left: 0 !important;
   }
   #social-icons p {
     margin-bottom: 0;
