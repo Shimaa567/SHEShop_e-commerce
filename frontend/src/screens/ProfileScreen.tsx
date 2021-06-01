@@ -10,6 +10,7 @@ import { getUserDetails } from "../redux/features/userDetails/userProfileDetails
 import { updateUserProfile } from "../redux/features/profile/updateProfile";
 import { listMyOrders } from "../redux/features/order/orderMyList";
 import { LinkContainer } from "react-router-bootstrap";
+import { USER_UPDATE_PROFILE_RESET } from "../redux/features/profile/types";
 
 type Inputs = {
   name?: string;
@@ -49,15 +50,16 @@ const ProfileScreen: React.FC = () => {
     if (!userInfo) {
       history.push("/login");
     } else {
-      if (!user?.name) {
-        dispatch(getUserDetails("profile"));
+      if (!user || !user?.name || success) {
+        dispatch({ type: USER_UPDATE_PROFILE_RESET });
+        dispatch(getUserDetails(`profile/${userInfo._id}`));
         dispatch(listMyOrders());
       } else {
         setValue("email", user.email, { shouldValidate: true });
         setValue("name", user.name);
       }
     }
-  }, [userInfo, history, dispatch, setValue, user]);
+  }, [userInfo, history, dispatch, setValue, user, success]);
 
   const onSubmit = (data: Inputs) => {
     console.log(data);
@@ -69,11 +71,10 @@ const ProfileScreen: React.FC = () => {
     }
     dispatch(
       updateUserProfile({
-        _id: user?._id || "",
+        _id: user?._id,
         name,
         email,
         password,
-        password_repeat,
       })
     );
   };

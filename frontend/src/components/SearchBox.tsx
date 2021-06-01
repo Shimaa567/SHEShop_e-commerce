@@ -16,20 +16,20 @@ const SearchBox = () => {
     }
   };
   return (
-    <Form onSubmit={submitHandler} inline className=" ml-sm-n5 py-2">
+    <Form onSubmit={submitHandler} inline className=" ml-sm-n5 py-2 ml-lg-5">
       <Form.Control
         type="text"
         name="q"
         onChange={(e) => setKeyword(e.target.value)}
         placeholder="Search Products Here..."
         className="m-auto mr-sm-2 ml-sm-5"
-        style={{ width: "450px" }}
+        id="search-box"
       ></Form.Control>
       <Button
         type="submit"
         variant="outline-primary"
         className="p-2"
-        style={{ width: "80px" }}
+        id="search-btn"
       >
         Search
       </Button>

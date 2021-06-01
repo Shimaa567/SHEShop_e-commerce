@@ -113,7 +113,7 @@ const getUsers = asyncHandler(async (req, res) => {
 });
 
 // //@desc    Delete User
-// //@route   GET /api/users/:id
+// //@route   DELETE /api/users/:id
 // //@access  Private
 const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);

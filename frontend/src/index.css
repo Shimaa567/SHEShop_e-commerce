@@ -1,5 +1,6 @@
 main {
   min-height: 80vh;
+  overflow-x: hidden;
 }
 
 h3 {
@@ -15,4 +16,182 @@ h2 {
 }
 .rating span {
   margin: 0.1rem;
+}
+
+/* carousel*/
+/* @media (min-width: 992px) {
+  #search-box {
+    width: 345px;
+  }
+  #search-btn {
+    width: 80px;
+  }
+  #carousel {
+    width: fit-content;
+  }
+  .carousel-img {
+    width: 1060px;
+    height: 800px;
+  }
+}
+
+@media (min-width: 768px) {
+  .carousel-img {
+    width: 455px;
+    height: 400px;
+  }
+}
+
+@media (min-width: 768px) {
+} */
+
+/* For desktop: */
+/* .col-1 {
+  width: 8.33%;
+}
+.col-2 {
+  width: 16.66%;
+}
+.col-3 {
+  width: 25%;
+}
+.col-4 {
+  width: 33.33%;
+}
+.col-5 {
+  width: 41.66%;
+}
+.col-6 {
+  width: 50%;
+}
+.col-7 {
+  width: 58.33%;
+}
+.col-8 {
+  width: 66.66%;
+} 
+.col-9 {
+  width: 75%;
+}
+.col-10 {
+  width: 83.33%;
+}
+.col-11 {
+  width: 91.66%;
+}
+.col-12 {
+  width: 100%;
+} */
+
+/* @media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+/* [class*="col-"] {
+    width: 100%;
+  }
+} */
+/* @media (min-width: 1200px) {
+  #search-box {
+    width: 450px;
+  }
+} */
+
+/* // Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+}
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  #navbar-container {
+    max-width: 710px;
+  }
+  .collection {
+    margin-top: 625px;
+    margin-left: -145px;
+  }
+  .carousel-inner {
+    width: 750px;
+    margin-left: 145px;
+  }
+  .carousel-inner img {
+    width: 750px;
+    height: 600px;
+  }
+  .carousel-indicators {
+    width: 875px;
+  }
+  .carousel-control-prev {
+    margin-left: 200px;
+  }
+  .carousel-control-next {
+    margin-right: -385px;
+  }
+  #home-title {
+    padding-top: 80px !important;
+  }
+  #social-icons {
+    margin-left: 115px !important;
+  }
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .collection {
+    margin-left: 321px;
+  }
+  .carousel-inner {
+    width: 1000px;
+    margin-left: 125px;
+  }
+  .carousel-inner img {
+    height: 500px;
+    width: fit-content;
+  }
+  .carousel-control-next {
+    margin-right: -420px;
+  }
+  .carousel-control-prev {
+    margin-left: 19px;
+  }
+  .carousel-indicators {
+    margin-left: 520 !important;
+    width: 1020px;
+  }
+  #coll-img {
+    width: 345px !important;
+    height: 90% !important;
+  }
+  #social-icons {
+    margin-left: 360px !important;
+  }
+}
+
+/* // Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .carousel-inner {
+    margin-left: 100px;
+    width: 800px;
+  }
+  .carousel-inner img {
+    width: 775px;
+    height: 615px;
+  }
+  .collection {
+    margin-left: 210px;
+  }
+  .carousel-control-next {
+    margin-right: -160px;
+  }
+  .carousel-control-prev {
+    margin-left: 85px;
+  }
+  .carousel-indicators {
+    margin-left: 60%;
+  }
+  #search-box {
+    width: 330px;
+  }
 }

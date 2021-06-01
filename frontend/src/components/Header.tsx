@@ -19,7 +19,7 @@ const Header: React.FC = () => {
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-        <Container>
+        <Container id="navbar-container">
           <LinkContainer to="/">
             <Navbar.Brand>
               <img
