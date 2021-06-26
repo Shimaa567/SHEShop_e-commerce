@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import qs from "querystring";
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import {
   Row,
   Col,
@@ -45,12 +45,12 @@ const CartScreen: React.FC = () => {
     }
   }, [dispatch, history, productId, qty]);
 
-  const removeFromCartHandler = (id: string) => {
+  const removeFromCartHandler = useCallback((id: string) => {
     dispatch(removeFromCart(id));
-  };
-  const checkoutHandler = () => {
-    history.push("/login?redirect=shipping");
-  };
+  }, [dispatch])
+  const checkoutHandler = useCallback(() => {
+    history.push("/login?redirect=shipping")
+  }, [history])
   //console.log(qs.parse(location.search.replace('?', '')));
   return (
     <Row>
@@ -134,4 +134,4 @@ const CartScreen: React.FC = () => {
   );
 };
 
-export default CartScreen;
+export default React.memo(CartScreen)

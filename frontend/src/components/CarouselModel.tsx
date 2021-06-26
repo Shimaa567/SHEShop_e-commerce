@@ -21,14 +21,7 @@ const CarouselModel: React.FC = () => {
           style={{ width: "1060px", height: "800px" }}
         />
         <Carousel.Caption>
-          <h4>
-            <img
-              src="/images/fire.png"
-              alt=""
-              style={{ width: "30px", height: "30px", marginTop: "-11px" }}
-            />
-            Hot & New{" "}
-          </h4>
+          <h4>🔥Hot & New</h4>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -96,4 +89,4 @@ const CarouselModel: React.FC = () => {
   );
 };
 
-export default CarouselModel;
+export default React.memo(CarouselModel);
