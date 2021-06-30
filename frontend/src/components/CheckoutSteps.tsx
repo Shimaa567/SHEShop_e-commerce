@@ -56,4 +56,4 @@ const CheckoutSteps: React.FC<Props> = ({ step1, step2, step3, step4 }) => {
   );
 };
 
-export default CheckoutSteps;
+export default React.memo(CheckoutSteps)

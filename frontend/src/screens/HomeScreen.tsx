@@ -28,7 +28,6 @@ const HomeScreen: React.FC<Props> = () => {
 
   const productList = useTypedSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
-  console.log(keyword, pageNumber);
 
   useEffect(() => {
     //Dispatch (SideEffect)
@@ -79,4 +78,4 @@ const HomeScreen: React.FC<Props> = () => {
   );
 };
 
-export default HomeScreen;
+export default React.memo(HomeScreen);

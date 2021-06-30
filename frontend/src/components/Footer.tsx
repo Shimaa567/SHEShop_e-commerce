@@ -9,32 +9,30 @@ const Footer: React.FC = () => {
           <Col className="text-left py-3">Copyrights &copy; SHEShop</Col>
 
           <Col
-            id="social-icons"
             style={{ marginLeft: "445px", marginTop: "10px" }}
+            id="social-icons"
           >
-            <p>Follow Us on:</p>
-            <div>
-              <Image
-                src="/images/social/facebook.png"
-                alt=""
-                className="px-2"
-              ></Image>
-              <Image
-                src="/images/social/twitter.png"
-                alt=""
-                className="pr-2"
-              ></Image>
-              <Image
-                src="/images/social/instagram.png"
-                alt=""
-                className="pr-2"
-              ></Image>
-              <Image
-                src="/images/social/pinterest.png"
-                alt=""
-                className="pr-2"
-              ></Image>
-            </div>
+            Follow Us on:
+            <Image
+              src="/images/social/facebook.png"
+              alt=""
+              className="px-2"
+            ></Image>
+            <Image
+              src="/images/social/twitter.png"
+              alt=""
+              className="pr-2"
+            ></Image>
+            <Image
+              src="/images/social/instagram.png"
+              alt=""
+              className="pr-2"
+            ></Image>
+            <Image
+              src="/images/social/pinterest.png"
+              alt=""
+              className="pr-2"
+            ></Image>
           </Col>
         </Row>
       </Container>
@@ -42,4 +40,4 @@ const Footer: React.FC = () => {
   );
 };
 
-export default Footer;
+export default React.memo(Footer)

@@ -50,8 +50,7 @@ const ProfileScreen: React.FC = () => {
     if (!userInfo) {
       history.push("/login");
     } else {
-      if (!user || !user?.name || success) {
-        dispatch({ type: USER_UPDATE_PROFILE_RESET });
+      if (!user?.name) {
         dispatch(getUserDetails(`profile/${userInfo._id}`));
         dispatch(listMyOrders());
       } else {

@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Row, Col, Button, Form, FormControl } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useTypedSelector } from "../redux/store";
 import FormContainer from "../components/FormContainer";
 import Message from "../components/Message";
@@ -15,7 +17,7 @@ type Inputs = {
   password: string;
   password_repeat: string;
 };
-
+toast.configure();
 const RegisterScreen: React.FC<Inputs> = () => {
   const { handleSubmit, errors, register, setError } = useForm<Inputs>({
     mode: "onChange",
@@ -42,8 +44,8 @@ const RegisterScreen: React.FC<Inputs> = () => {
       setError("password_repeat", { message: `The two passwords don't match` });
     } else {
       dispatch(registerUser(name, email, password, password_repeat));
-      alert("Your Registration has been Completed Successfully");
-
+      <ToastContainer />;
+      toast("Your Registration has been Completed Successfully!");
       history.push("/");
     }
   };

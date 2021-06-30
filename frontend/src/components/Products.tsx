@@ -31,4 +31,4 @@ const Products: React.FC<Props> = ({ product }) => {
   );
 };
 
-export default Products;
+export default React.memo(Products)

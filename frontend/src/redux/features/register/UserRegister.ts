@@ -19,7 +19,12 @@ export default function reducer(
     case USER_REGISTER_REQUEST:
       return { ...state, loading: true };
     case USER_REGISTER_FULFILLED:
-      return { ...state, loading: false, userInfo: action.payload };
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        userInfo: action.payload,
+      };
     case USER_REGISTER_REJECTED:
       return { ...state, loading: false, error: action.payload };
     default:

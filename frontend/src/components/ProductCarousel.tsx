@@ -25,7 +25,7 @@ const ProductCarousel = () => {
           <CarouselModel />
         </Col>
 
-        <Col md={2} className="collection">
+        <Col md={2} style={{ marginLeft: "155px" }} className="collection">
           <div
             style={{
               display: "inline-block",
@@ -43,7 +43,7 @@ const ProductCarousel = () => {
               New Arrival !
             </h4>
           </div>
-          <Image
+          <img
             id="coll-img"
             src="/images/collection.gif"
             alt=""

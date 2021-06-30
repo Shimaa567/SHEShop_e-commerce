@@ -10,6 +10,7 @@ import {
   Button,
   Form,
 } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
 import Rating from "../components/Rating";
 import { Product } from "../types/Product";
 import { useTypedSelector } from "../redux/store";
@@ -60,7 +61,6 @@ const ProductScreen: React.FC<Props> = () => {
   //Check here
   useEffect(() => {
     if (successReview) {
-      alert("Review Submitted, Thank You !");
       setRating(0);
       setComment("");
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
@@ -75,6 +75,8 @@ const ProductScreen: React.FC<Props> = () => {
   const submitHandler = (e: any) => {
     e.preventDefault();
     dispatch(reviewProduct(id, { rating, comment }));
+    <ToastContainer />;
+    toast("Your review has been added successfully!");
   };
 
   if (loading) return <Loader />;
