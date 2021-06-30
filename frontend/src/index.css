@@ -65,21 +65,24 @@ h2 {
 /* // Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
   .carousel-inner {
-    width: 630px;
-    margin-left: 130px;
+    width: 650px;
+    margin-left: 90px;
   }
   .carousel-inner img {
-    width: 570px;
-    height: 600px;
+    width: 570px !important;
+    height: 600px !important;
   }
   .carousel-indicators {
-    width: 875px;
+    width: 640px !important;
   }
   .carousel-control-prev {
-    margin-left: 200px;
+    margin-left: 125px !important;
   }
   .carousel-control-next {
-    margin-right: -480px;
+    margin-right: 30px !important;
+  }
+  .collection {
+    margin-left: 10px !important;
   }
   #coll-img {
     margin-left: 100px;
@@ -101,8 +104,7 @@ h2 {
     max-width: 710px;
   }
   .collection {
-    margin-top: 625px;
-    margin-left: -145px;
+    margin-left: 175px !important;
   }
   .carousel-inner {
     width: 750px;
@@ -132,7 +134,7 @@ h2 {
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .collection {
-    margin-left: 321px;
+    margin-left: 260px !important;
   }
   .carousel-inner {
     width: 1000px;
@@ -151,6 +153,9 @@ h2 {
   .carousel-indicators {
     margin-left: 520 !important;
     width: 1020px;
+  }
+  #search-box {
+    width: 350px !important;
   }
   #coll-img {
     width: 345px !important;

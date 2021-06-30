@@ -7,7 +7,6 @@ import { useHistory } from "react-router";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { listOrders } from "../redux/features/order/orderList";
-//import { deleteOrder } from "../redux/features/Order/OrderDelete";
 
 const OrderListScreen: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,12 +18,7 @@ const OrderListScreen: React.FC = () => {
   const orderList = useTypedSelector((state) => state.orderList);
   const { loading, error, orders } = orderList;
 
-  //   const userDelete = useTypedSelector((state) => state.userDelete);
-  //   const {
-  //     loading: loadingDelete,
-  //     error: errorDelete,
-  //     success: successDelete,
-  //   } = userDelete;
+ 
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
@@ -34,17 +28,9 @@ const OrderListScreen: React.FC = () => {
     }
   }, [dispatch, userInfo, history]);
 
-  //   const deleteHandler = (id: string | undefined) => {
-  //     if (window.confirm("Are you sure you want to delete this user?")) {
-  //       //dispatch(deleteUser(id));
-  //     }
-  //   };
   return (
     <>
       <h1>Orders</h1>
-      {/* 
-      {loadingDelete && <Loader />}
-      {errorDelete && <Message variant="danger">{errorDelete}</Message>} */}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -73,13 +59,11 @@ const OrderListScreen: React.FC = () => {
                   {order.isPaid ? (
                     order.paidAt?.toString().substring(0, 10)
                   ) : (
-                    // <i className="fas fa-check" style={{ color: "green" }}></i>
                     <i className="fas fa-times" style={{ color: "red" }}></i>
                   )}
                 </td>
                 <td>
                   {order.isDelivered ? (
-                    // <i className="fas fa-check" style={{ color: "green" }}></i>
                     order.deliveredAt?.toString().substring(0, 10)
                   ) : (
                     <i className="fas fa-times" style={{ color: "red" }}></i>
@@ -101,4 +85,4 @@ const OrderListScreen: React.FC = () => {
   );
 };
 
-export default OrderListScreen;
+export default React.memo(OrderListScreen)

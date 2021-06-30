@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Row, Col, Button, Form } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
 import { useTypedSelector } from "../redux/store";
 import FormContainer from "../components/FormContainer";
 import Message from "../components/Message";
@@ -30,14 +31,19 @@ const LoginScreen: React.FC = () => {
 
   useEffect(() => {
     if (userInfo) {
+      <ToastContainer />;
+      toast("Welcome back!");
       history.push(redirect);
     }
   }, [userInfo, history, redirect]);
 
-  const onSubmit = (data: Inputs) => {
-    const { email, password } = data;
-    dispatch(login(email, password));
-  };
+  const onSubmit = useCallback(
+    (data: Inputs) => {
+      const { email, password } = data;
+      dispatch(login(email, password));
+    },
+    [dispatch]
+  );
 
   return (
     <FormContainer>
@@ -85,4 +91,4 @@ const LoginScreen: React.FC = () => {
   );
 };
 
-export default LoginScreen;
+export default React.memo(LoginScreen);

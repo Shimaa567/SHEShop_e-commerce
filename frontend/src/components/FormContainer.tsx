@@ -17,4 +17,4 @@ const FormContainer: React.FC<Props> = ({ children }) => {
   );
 };
 
-export default FormContainer;
+export default React.memo(FormContainer)
