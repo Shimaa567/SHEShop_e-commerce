@@ -8,17 +8,16 @@ const SearchBox = () => {
   const history = useHistory();
 
   const submitHandler = useCallback(
-      (e: any) => {
-        e.preventDefault();
-        if (keyword.trim()) {
-          history.push(`/search/${keyword}`);
-        } else {
-          history.push("/");
-        }
+    (e: any) => {
+      e.preventDefault();
+      if (keyword.trim()) {
+        history.push(`/search/${keyword}`);
+      } else {
+        history.push("/");
       }
-    ,
-    [history, keyword],
-  )
+    },
+    [history, keyword]
+  );
 
   return (
     <Form onSubmit={submitHandler} inline className=" ml-sm-n5 py-2 ml-lg-5">
@@ -43,4 +42,4 @@ const SearchBox = () => {
   );
 };
 
-export default React.memo(SearchBox)
+export default React.memo(SearchBox);

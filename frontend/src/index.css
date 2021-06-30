@@ -169,21 +169,21 @@ h2 {
 /* // Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   .carousel-inner {
-    margin-left: 100px;
-    width: 800px;
+    margin-left: 10px;
+    width: 1000px !important;
   }
   .carousel-inner img {
-    width: 775px;
+    width: 1060px !important;
     height: 615px;
   }
   .collection {
-    margin-left: 210px;
+    margin-left: 145px;
   }
   .carousel-control-next {
-    margin-right: -160px;
+    margin-right: -25px;
   }
   .carousel-control-prev {
-    margin-left: 85px;
+    margin-left: -10px;
   }
   .carousel-indicators {
     margin-left: 60%;
