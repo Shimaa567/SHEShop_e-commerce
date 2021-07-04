@@ -103,8 +103,11 @@ h2 {
   #navbar-container {
     max-width: 710px;
   }
+  #search-box {
+    width: 500px;
+  }
   .collection {
-    margin-left: 175px !important;
+    margin-left: 281px !important;
   }
   .carousel-inner {
     width: 750px;
@@ -134,7 +137,7 @@ h2 {
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .collection {
-    margin-left: 260px !important;
+    margin-left: 330px !important;
   }
   .carousel-inner {
     width: 1000px;
@@ -155,7 +158,7 @@ h2 {
     width: 1020px;
   }
   #search-box {
-    width: 350px !important;
+    width: 270px !important;
   }
   #coll-img {
     width: 345px !important;
@@ -177,7 +180,7 @@ h2 {
     height: 615px;
   }
   .collection {
-    margin-left: 145px;
+    margin-left: 330px !important;
   }
   .carousel-control-next {
     margin-right: -25px;
