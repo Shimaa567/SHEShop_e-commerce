@@ -1,4 +1,4 @@
-import { UserInfo } from "./../users/types";
+import { UserInfo, USER_LOGIN_FULFILLED } from "./../users/types";
 //Types
 import {
   USER_UPDATE_PROFILE_FULFILLED,
@@ -28,16 +28,12 @@ export default function reducer(
       return { loading: true };
     case USER_UPDATE_PROFILE_FULFILLED:
       return {
-        ...state,
         loading: false,
         success: true,
-        userInfo: action.payload,
       };
     case USER_UPDATE_PROFILE_REJECTED:
       return {
-        ...state,
         loading: false,
-        success: false,
         error: action.payload,
       };
     default:
@@ -75,6 +71,11 @@ export const updateUserProfile = (user: UserInfo) => async (
       type: USER_UPDATE_PROFILE_FULFILLED,
       payload: data,
     });
+    dispatch({
+      type: USER_LOGIN_FULFILLED,
+      payload: data,
+    });
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_UPDATE_PROFILE_REJECTED,

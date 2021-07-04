@@ -8,17 +8,12 @@ const CarouselModel: React.FC = () => {
   };
 
   return (
-    <Carousel
-      activeIndex={index}
-      onSelect={handleSelect}
-      style={{ width: "fit-content" }}
-    >
+    <Carousel activeIndex={index} onSelect={handleSelect} id="carousel">
       <Carousel.Item>
         <img
-          className="d-block m-auto"
+          className="d-block m-auto carousel-img"
           src="/images/slider.jpg"
           alt="First slide"
-          style={{ width: "1060px", height: "800px" }}
         />
         <Carousel.Caption>
           <h4>🔥Hot & New</h4>
@@ -26,10 +21,9 @@ const CarouselModel: React.FC = () => {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block m-auto"
+          className="d-block m-auto carousel-img"
           src="/images/slider3.jpg"
           alt="Second slide"
-          style={{ width: "1060px", height: "800px" }}
         />
 
         <Carousel.Caption>
@@ -38,10 +32,9 @@ const CarouselModel: React.FC = () => {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block m-auto"
+          className="d-block m-auto carousel-img"
           src="/images/slider1.jpg"
           alt="Third slide"
-          style={{ width: "1060px", height: "800px" }}
         />
 
         <Carousel.Caption>
@@ -50,10 +43,9 @@ const CarouselModel: React.FC = () => {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block m-auto"
+          className="d-block m-auto carousel-img"
           src="/images/slider1.png"
           alt="Forth slide"
-          style={{ width: "1060px", height: "800px" }}
         />
 
         <Carousel.Caption>
@@ -62,10 +54,9 @@ const CarouselModel: React.FC = () => {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block  m-auto"
+          className="d-block  m-auto carousel-img"
           src="/images/slider4.jpg"
           alt="Fifth slide"
-          style={{ width: "1060px", height: "800px" }}
         />
 
         <Carousel.Caption>
@@ -76,10 +67,9 @@ const CarouselModel: React.FC = () => {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block  m-auto"
+          className="d-block  m-auto carousel-img"
           src="/images/slider2.jpg"
           alt="sixth slide"
-          style={{ width: "1060px", height: "800px" }}
         />
         <Carousel.Caption>
           <h4 style={{ color: "#005098" }}>👗 Your Elegance is our Passion</h4>

@@ -1,6 +1,6 @@
 import React from "react";
 import CarouselModel from "../components/CarouselModel";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Image } from "react-bootstrap";
 
 const ProductCarousel = () => {
   return (
@@ -15,7 +15,13 @@ const ProductCarousel = () => {
         Welcome To Ladies Corner ❤️!
       </h1>
       <Row className="mb-3">
-        <Col md={10} sm={4} style={{ marginLeft: "-160px" }} className="mb-3">
+        <Col
+          md={8}
+          sm={4}
+          style={{ marginLeft: "-160px" }}
+          className="mb-3"
+          id="carousel-col"
+        >
           <CarouselModel />
         </Col>
 
@@ -28,7 +34,7 @@ const ProductCarousel = () => {
             }}
             className="new-arrive"
           >
-            <img
+            <Image
               src="/images/new.gif"
               alt=""
               style={{ width: "50px", height: "50px" }}
